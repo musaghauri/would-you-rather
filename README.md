@@ -1,11 +1,16 @@
-# Would You Rather
+# Would you Rather
 
-This repo is a React & Redux Project for my [React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
+## Description
 
-## Project Setup
+Would you Rather was built for the Udacity React Nano Degree. This project is a quiz app that allows you to create polls and vote on them. It is built using simple React.js structure.
 
-* clone the Project - `git@github.com:musaghauri/would-you-rather.git`
-* install the dependencies - `npm install`
+## App Setup
+
+To get started developing right away:
+
+* install all project dependencies with `npm install`
+* start the development server with `npm start`
+* Once al the dependencies are installed, run the project on [http://localhost:3000](http://localhost:3000)
 
 ## License
 
