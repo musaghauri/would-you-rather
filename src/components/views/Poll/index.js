@@ -100,7 +100,7 @@ function mapStateToProps({ loading, authedUser, users, questions }) {
     loading,
     authedUser,
     users,
-    questions
+    questions: questions.questions,
   }
 }
 

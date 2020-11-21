@@ -6,10 +6,9 @@ import {
   Text,
   Input,
   Divider
-} from '@chakra-ui/core';
+} from '@chakra-ui/core'
 import { connect } from 'react-redux'
-import { _saveQuestion } from '../../../utils/_DATA'
-import { handleInitialData } from '../../../actions/shared'
+import { saveQuestion, setValue } from '../../../actions/questions'
 
 class NewQuestion extends React.Component {
   state = {
@@ -19,10 +18,8 @@ class NewQuestion extends React.Component {
 
   handleSubmit = () => {
     const { firstOption, secondOption } = this.state
-    const { authedUser, dispatch, history } = this.props;
-    _saveQuestion({ author: authedUser, optionOneText: firstOption, optionTwoText: secondOption }).then(() => {
-      dispatch(handleInitialData()).then(() => history.push('/'))
-    })
+    const { authedUser, dispatch } = this.props;
+    dispatch(saveQuestion({ author: authedUser, optionOneText: firstOption, optionTwoText: secondOption }));
   }
 
   handleInputChange = (e) => {
@@ -30,8 +27,19 @@ class NewQuestion extends React.Component {
     this.setState({ [name]: value })
   }
 
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { questionAdded, history } = nextProps;  
+    if(questionAdded) history.replace("/")
+  }
+
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch(setValue(false));
+  }
   render() {
+    
     const { firstOption, secondOption } = this.state
+    
     return (
       <Box
         backgroundColor="white"
@@ -94,10 +102,13 @@ class NewQuestion extends React.Component {
   }
 }
 
-function mapStateToProps({ authedUser, questions }) {
+function mapStateToProps({ authedUser, loading, questions, questionAdded }) {
   return {
     authedUser,
-    questions
+    questions: questions.questions,
+    questionAdded: questions.questionAdded,
+    loading,
+    
   }
 }
 

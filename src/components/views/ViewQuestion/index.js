@@ -28,7 +28,7 @@ function mapStateToProps({ authedUser, questions }) {
     return {
       loading: authedUser === null,
       authedUser,
-      questions
+      questions: questions.questions,
     }
   }
   

@@ -113,11 +113,12 @@ class Home extends React.Component {
 
 }
 
-function mapStateToProps({ authedUser, users, questions }) {
+function mapStateToProps({ authedUser, users, questions, ...rest }) {
+  console.log({ authedUser, users, questions, rest })
   return {
     authedUser,
     users,
-    questions
+    questions: questions.questions
   }
 }
 
