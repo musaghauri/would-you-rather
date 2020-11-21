@@ -34,7 +34,7 @@ class NewQuestion extends React.Component {
 
   componentWillUnmount() {
     const { dispatch } = this.props;
-    dispatch(setValue(false));
+    dispatch(setValue('questionAdded', false));
   }
   render() {
     

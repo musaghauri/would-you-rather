@@ -2,6 +2,7 @@ import { RECEIVE_QUESTIONS, SET_VALUE } from '../actions/questions'
 
 const initialState = {
   questionAdded: false,
+  pollAnswered: false,
   questions: []
 }
 export default function questions(state = initialState, action) {

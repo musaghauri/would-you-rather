@@ -10,8 +10,7 @@ import {
 } from '@chakra-ui/core';
 import { connect } from 'react-redux'
 import { withRouter } from "react-router";
-import { _saveQuestionAnswer } from '../../../utils/_DATA'
-import { handleInitialData } from '../../../actions/shared'
+import { saveQuestionAnswer, setValue } from '../../../actions/questions'
 
 class Poll extends React.Component {
   state = { answer: null }
@@ -20,11 +19,21 @@ class Poll extends React.Component {
 
   handleSubmit = () => {
     const { answer } = this.state
-    const { authedUser, dispatch, history } = this.props;
+    const { authedUser, dispatch } = this.props;
     const { questionId } = this.props.match.params;
-    _saveQuestionAnswer({ authedUser: authedUser, qid: questionId, answer: answer }).then(() => {
-      dispatch(handleInitialData()).then( () => history.push(`/questions/${questionId}`))
-    })
+    dispatch(saveQuestionAnswer({ authedUser: authedUser, qid: questionId, answer: answer }))
+    
+  }
+  
+  // UNSAFE_componentWillReceiveProps(nextProps) {
+  //   const { pollAnswered, history } = nextProps;  
+  //   const { questionId } = this.props.match.params;
+  //   if(pollAnswered) history.replace(`/questions/${questionId}`)
+  // }
+
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch(setValue('pollAnswered', false));
   }
 
   render() {
@@ -101,6 +110,7 @@ function mapStateToProps({ loading, authedUser, users, questions }) {
     authedUser,
     users,
     questions: questions.questions,
+    pollAnswered: questions.pollAnswered
   }
 }
 
