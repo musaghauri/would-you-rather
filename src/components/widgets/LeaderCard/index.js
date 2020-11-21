@@ -44,7 +44,7 @@ class LeaderCard extends React.Component {
               </Flex>
               <Divider width="100%" />
               <Flex justify="space-between" align="baseline" w="full">
-                <Text >Unanswered Questions</Text><Text>{questionsCount}</Text>
+                <Text>Questions Asked</Text><Text>{questionsCount}</Text>
               </Flex>
             </Flex>
           </Flex>
