@@ -19,8 +19,8 @@ class NewQuestion extends React.Component {
 
   handleSubmit = () => {
     const { firstOption, secondOption } = this.state
-    const { authedUser, dispatch } = this.props;
-    dispatch(saveQuestion({ author: authedUser, optionOneText: firstOption, optionTwoText: secondOption }));
+    const { authedUser } = this.props;
+    this.props.saveQuestion({ author: authedUser, optionOneText: firstOption, optionTwoText: secondOption });
   }
 
   handleInputChange = (e) => {
@@ -30,8 +30,7 @@ class NewQuestion extends React.Component {
 
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch(setValue('questionAdded', false));
+    this.props.setValue('questionAdded', false);
   }
   render() {
     
@@ -111,4 +110,4 @@ function mapStateToProps({ authedUser, loading, questions, questionAdded }) {
   }
 }
 
-export default connect(mapStateToProps)(NewQuestion)
+export default connect(mapStateToProps, { saveQuestion, setValue })(NewQuestion)

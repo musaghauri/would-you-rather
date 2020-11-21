@@ -20,14 +20,13 @@ class Poll extends React.Component {
 
   handleSubmit = () => {
     const { answer } = this.state
-    const { authedUser, dispatch } = this.props;
+    const { authedUser } = this.props;
     const { questionId } = this.props.match.params;
-    dispatch(saveQuestionAnswer({ authedUser: authedUser, qid: questionId, answer: answer }))
+    this.props.saveQuestionAnswer({ authedUser: authedUser, qid: questionId, answer: answer })
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch(setValue('pollAnswered', false));
+    this.props.setValue('pollAnswered', false);
   }
 
   render() {
@@ -109,4 +108,4 @@ function mapStateToProps({ loading, authedUser, users, questions }) {
   }
 }
 
-export default connect(mapStateToProps)(withRouter(Poll))
+export default connect(mapStateToProps, { setValue, saveQuestionAnswer })(withRouter(Poll))
