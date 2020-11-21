@@ -7,6 +7,7 @@ import {
   Input,
   Divider
 } from '@chakra-ui/core'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { saveQuestion, setValue } from '../../../actions/questions'
 
@@ -27,10 +28,6 @@ class NewQuestion extends React.Component {
     this.setState({ [name]: value })
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { questionAdded, history } = nextProps;  
-    if(questionAdded) history.replace("/")
-  }
 
   componentWillUnmount() {
     const { dispatch } = this.props;
@@ -39,7 +36,9 @@ class NewQuestion extends React.Component {
   render() {
     
     const { firstOption, secondOption } = this.state
-    
+    const { questionAdded } = this.props;
+
+    if(questionAdded) return <Redirect to="/" />
     return (
       <Box
         backgroundColor="white"

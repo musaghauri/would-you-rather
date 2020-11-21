@@ -9,6 +9,7 @@ import {
   RadioGroup
 } from '@chakra-ui/core';
 import { connect } from 'react-redux'
+import { Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
 import { saveQuestionAnswer, setValue } from '../../../actions/questions'
 
@@ -22,14 +23,7 @@ class Poll extends React.Component {
     const { authedUser, dispatch } = this.props;
     const { questionId } = this.props.match.params;
     dispatch(saveQuestionAnswer({ authedUser: authedUser, qid: questionId, answer: answer }))
-    
   }
-  
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   const { pollAnswered, history } = nextProps;  
-  //   const { questionId } = this.props.match.params;
-  //   if(pollAnswered) history.replace(`/questions/${questionId}`)
-  // }
 
   componentWillUnmount() {
     const { dispatch } = this.props;
@@ -38,11 +32,12 @@ class Poll extends React.Component {
 
   render() {
     const { answer } = this.state;
-    const { questions, users } = this.props
+    const { questions, users, pollAnswered } = this.props
     const { questionId } = this.props.match.params;
     const currentQuestion = questions[questionId]
     const author = users[currentQuestion.author]
-    console.log({ currentQuestion })
+    
+    if(pollAnswered) return <Redirect to={`/questions/${questionId}`} />
     return (
       <Box
         backgroundColor="white"
