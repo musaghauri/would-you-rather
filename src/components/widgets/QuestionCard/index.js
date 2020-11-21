@@ -14,7 +14,6 @@ import { format } from 'date-fns'
 class QuestionCard extends React.Component {
   render() {
     const { users, question, showResult } = this.props
-    console.log({ question })
     return (
       <Box
         backgroundColor="white"

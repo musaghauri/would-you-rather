@@ -18,7 +18,6 @@ class Home extends React.Component {
     const { questions, users, authedUser } = this.props;
     const currentUser = users[authedUser];
     const answered = currentUser.answers;
-    console.log({ questions, users, authedUser })
     const unanswered = Object.keys(questions)
       .filter(question => !Object.keys(answered).includes(question))// eslint-disable-next-line 
       .reduce((res, question) => (res[question] = questions[question], res), {}); 
@@ -27,7 +26,6 @@ class Home extends React.Component {
     const sortedUnanswered = Object.values(unanswered).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     const sortedAnswered = Object.keys(answered).sort((a, b) => new Date(questions[b].timestamp) - new Date(questions[a].timestamp));
     this.setState({ sortedUnanswered, sortedAnswered })
-    console.log({ sortedUnanswered, sortedAnswered })
   }
 
   render() {
@@ -114,7 +112,6 @@ class Home extends React.Component {
 }
 
 function mapStateToProps({ authedUser, users, questions, ...rest }) {
-  console.log({ authedUser, users, questions, rest })
   return {
     authedUser,
     users,

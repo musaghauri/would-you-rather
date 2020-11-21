@@ -11,7 +11,6 @@ class ViewQuestion extends React.Component {
     const { questions, authedUser } = this.props;
     if(!questions[questionId]) return <NotFound />
     else {
-        console.log("MUSA", questions[questionId])
         const currentQuestion = questions[questionId];
         const { optionOne, optionTwo } = currentQuestion;
         const votes = [...optionOne.votes, ...optionTwo.votes];

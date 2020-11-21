@@ -31,7 +31,6 @@ class Login extends React.Component {
   }
 
   render() {
-    console.log("AJA", this.props)
     const { users } = this.props
     return (
       <Box
